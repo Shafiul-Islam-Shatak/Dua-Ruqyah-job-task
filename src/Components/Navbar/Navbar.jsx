@@ -14,7 +14,7 @@ import Image from 'next/image';
 
 function Navbar(props) {
     return (
-        <div className='bg-white max-w-[100px] flex flex-col items-center rounded-2xl mt-10 ml-10 py-6'>
+        <div className='bg-white flex flex-col items-center rounded-2xl mt-10 ml-10 py-6'>
             {/* logo */}
             <div>
                 <Image
@@ -26,7 +26,7 @@ function Navbar(props) {
             </div>
 
             {/* others icone */}
-            <div className='my-[130px]'>
+            <div className='mt-[120px] mb-[130px]'>
                 <ul className='space-y-6'>
                     <li >
                         <div className='w-[38px] bg-gray-200 h-[38px] rounded-full flex items-center justify-center'>
