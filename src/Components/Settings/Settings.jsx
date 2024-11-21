@@ -30,6 +30,13 @@ const Settings = () => {
                 </div>
                 <div><h1>Appearance Settings</h1></div>
             </div>
+            <div className="flex justify-between py-2 mx-2 px-2 ">
+                <h1>Night Mode</h1>
+                <div className="flex items-center">
+                    <div className="w-4 h-4 z-10 bg-gray-500 rounded-full"></div>
+                    <div className="w-10 h-2 -ml-4 bg-gray-400 rounded-full"></div>
+                </div>
+            </div>
         </div>
     );
 };
