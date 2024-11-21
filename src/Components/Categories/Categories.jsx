@@ -46,14 +46,14 @@ const Categories = () => {
                 <h1 className="text-white text-center">Categories</h1>
             </div>
             {/* Search bar */}
-            <div className="relative w-[400px] mx-auto bg-white my-4 product_search_input">
+            <div className="relative w-[400px] mx-auto bg-white my-4 product_search_input px-3">
                 <input
                     className="px-4 py-3  border border-gray-200 rounded-md w-full pl-[40px] outline-none focus:border-primary"
                     placeholder="Search by Categories"
                 />
-                <IoIosSearch className="absolute top-[9px] left-2 text-[1.5rem] text-[#adadad]" />
+                <IoIosSearch className="absolute top-[15px] left-5 text-[1.5rem] text-[#adadad]" />
             </div>
-            <div className="overflow-auto max-h-[745px] ">
+            <div className="overflow-auto max-h-[745px] px-3 ">
                 {categories.map((category) => (
                     <div
                         key={category.cat_id}
