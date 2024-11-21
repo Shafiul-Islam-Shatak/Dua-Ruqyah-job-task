@@ -20,14 +20,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en " data-theme="light">
       <head>
         <link rel="icon" href="https://i.ibb.co/fYXX6jJ/logo-1.png" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` bg-gray-300`}
       >
-        <div className="flex bg-gray-300">
+        <div className="flex space-x-6">
           <div className=""><Navbar></Navbar></div>
           <div><Categories/></div>
           <div>

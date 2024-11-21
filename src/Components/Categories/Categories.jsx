@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import CategoriesCard from "./CategoiresCard";
+import { GoDotFill } from "react-icons/go";
+import { HiDotsVertical } from "react-icons/hi";
+
+
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
@@ -18,66 +22,73 @@ const Categories = () => {
             const catData = await response.json();
             const subCatData = await response2.json();
             setCategories(catData);
-            setSubCategories(subCatData)
+            setSubCategories(subCatData);
         };
         fetchData();
     }, []);
 
-    console.log(categories);
-    console.log(subCategories);
-
     const handleClickedCat = (cat_id) => {
-        setSelectedCategoryId(cat_id)
-        const selectedCat = categoryRefs.current[cat_id]
+        setSelectedCategoryId(cat_id);
+        const selectedCat = categoryRefs.current[cat_id];
         if (selectedCat) {
-            selectedCat.scrollIntoView({ behavior: 'smooth', block: "start" })
+            selectedCat.scrollIntoView({ behavior: 'smooth', block: "start" });
         }
-    }
+    };
 
-    const filterSubcategory = subCategories.filter(
+    // Filter subcategories based on the selected category ID
+    const filteredSubcategories = subCategories.filter(
         (subCategory) => subCategory.cat_id === selectedCategoryId
-    )
-    console.log(filterSubcategory);
-
-
+    );
 
     return (
-        <div className="w-[430px] rounded-lg  mt-10 bg-white max-h-[745px] overflow-auto ml-6">
+        <div className=" rounded-lg  bg-white max-h-[900px]">
             <div className="bg-[#1FA45B] rounded-t-lg text-lg py-[18px]">
                 <h1 className="text-white text-center">Categories</h1>
             </div>
-            {/* serch bar */}
-            <div className="relative w-[400px]  mx-auto my-4 product_search_input">
+            {/* Search bar */}
+            <div className="relative w-[400px] mx-auto bg-white my-4 product_search_input">
                 <input
-                    className="px-4 py-3 border border-gray-200 rounded-md w-full  pl-[40px] outline-none focus:border-primary"
-                    placeholder="Search by Categories" />
+                    className="px-4 py-3  border border-gray-200 rounded-md w-full pl-[40px] outline-none focus:border-primary"
+                    placeholder="Search by Categories"
+                />
                 <IoIosSearch className="absolute top-[9px] left-2 text-[1.5rem] text-[#adadad]" />
             </div>
-            <div className="">
-                {
-                    categories && (
-                        categories.map(category =>
-                            <div
-                                key={category.id}
-                                ref={(el) => categoryRefs.current[category.cat_id] = el}
-                            >
-                                <CategoriesCard
-                                    category={category}
-                                    handleClickedCat={(handleClickedCat(category.cat_id))}
-                                />
+            <div className="overflow-auto max-h-[745px] ">
+                {categories.map((category) => (
+                    <div
+                        key={category.cat_id}
+                        ref={(el) => (categoryRefs.current[category.cat_id] = el)}
+                    >
+                        <CategoriesCard
+                            category={category}
+                            handleClickedCat={() => handleClickedCat(category.cat_id)}
+                        />
+                        {selectedCategoryId === category.cat_id &&
+                            <ul className=" relative ml-5 ">
                                 {
-                                    selectedCategoryId === category.cat_id && (
-                                        filterSubcategory.map(subcat =>
-                                            <div key={subcat.id}>
-                                                <h1>{subcat.subcat_name_en}</h1>
+                                    filteredSubcategories.map((subcat, index) =>
+                                        <li key={subcat.id}
+                                            className="mb-2"
+                                        >
+
+
+                                            <div className="flex relative items-start  space-x-5  border-none">
+                                                <div className="">
+                                                    <GoDotFill />
+                                                </div>
+                                                {/* Content */}
+                                                <div className=" ">
+                                                    <button className="max-w-[310px] text-left"> {subcat.subcat_name_en}</button>
+                                                </div>
                                             </div>
-                                        )
+                                        </li>
                                     )
                                 }
-                            </div>
-                        )
-                    )
-                }
+                            </ul>
+
+                        }
+                    </div>
+                ))}
             </div>
         </div>
     );
