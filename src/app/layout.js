@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from '/src/Components/Navbar/Navbar.jsx'
 import Categories from "@/Components/Categories/Categories";
 import Settings from "@/Components/Settings/Settings";
+import Header from "@/Components/Header/Header";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -30,11 +31,16 @@ export default function RootLayout({ children }) {
       >
         <div className="flex space-x-6">
           <div className=""><Navbar></Navbar></div>
-          <div><Categories/></div>
-          <div>
-            {children}
+          <div className="flex flex-col space-x-6">
+            <div className=""><Header /></div>
+            <div className="flex flex-row space-x-6">
+              <div><Categories /></div>
+              <div>
+                {children}
+              </div>
+              <div><Settings /></div>
+            </div>
           </div>
-          <div><Settings/></div>
         </div>
       </body>
     </html>

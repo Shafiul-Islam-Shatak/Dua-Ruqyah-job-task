@@ -13,6 +13,8 @@ const Categories = () => {
     const [subCategories, setSubCategories] = useState([]);
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
     const categoryRefs = useRef({});
+    const [selectedSubCategoryId, setSelectedSubCategoryId] = useState(null);
+    const [duas, setDuas] = useState([]);
 
     useEffect(() => {
         // Fetch data from the API endpoint
@@ -33,7 +35,23 @@ const Categories = () => {
         if (selectedCat) {
             selectedCat.scrollIntoView({ behavior: 'smooth', block: "start" });
         }
+
     };
+
+
+    const handleClickedSubCat = async (subCatId) => {
+        setSelectedSubCategoryId(subCatId);
+
+        // Fetch Duas based on the selected subcategory
+        const response = await fetch(`/api/duas?subCategoryId=${subCatId}`);
+        const duaData = await response.json();
+        setDuas(duaData);
+    };
+
+    console.log(duas);
+    
+
+
 
     // Filter subcategories based on the selected category ID
     const filteredSubcategories = subCategories.filter(
@@ -43,7 +61,7 @@ const Categories = () => {
     return (
         <div className=" rounded-lg  bg-white max-h-[900px]">
             <div className="bg-[#1FA45B] rounded-t-lg text-lg py-[18px]">
-                <h1 className="text-white text-center">Categories</h1>
+                <h1 className="text-white font-semibold text-center">Categories</h1>
             </div>
             {/* Search bar */}
             <div className="relative w-[400px] mx-auto bg-white my-4 product_search_input px-3">
@@ -69,16 +87,16 @@ const Categories = () => {
                                     filteredSubcategories.map((subcat, index) =>
                                         <li key={subcat.id}
                                             className="mb-2"
+                                            onClick={() => handleClickedSubCat(subcat.id)}
                                         >
-
-
                                             <div className="flex relative items-start  space-x-5  border-none">
                                                 <div className="">
                                                     <GoDotFill />
                                                 </div>
-                                                {/* Content */}
+                                                {/*sub cat list */}
                                                 <div className=" ">
                                                     <button className="max-w-[310px] text-left"> {subcat.subcat_name_en}</button>
+                                                    
                                                 </div>
                                             </div>
                                         </li>
@@ -89,6 +107,7 @@ const Categories = () => {
                         }
                     </div>
                 ))}
+                
             </div>
         </div>
     );

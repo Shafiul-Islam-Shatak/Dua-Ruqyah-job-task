@@ -49,8 +49,11 @@ const DuaCard = ({ dua, index }) => {
                 {
                     audio ? (
                         <div className="bg-[#1FA45B] w-11 h-11 flex items-center justify-center rounded-full">
+                            {/* audio player btn */}
                             <FaPlay className="text-white" />
+
                         </div>
+
                     ) : (<div>  </div>)
                 }
                 <div className="justify-end">
